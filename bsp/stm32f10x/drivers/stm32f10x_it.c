@@ -57,10 +57,10 @@ void NMI_Handler(void)
   */
 void MemManage_Handler(void)
 {
-    /* Go to infinite loop when Memory Manage exception occurs */
-    while (1)
-    {
-    }
+	/* Go to infinite loop when Memory Manage exception occurs */
+	while (1)
+	{
+	}
 }
 
 /**
@@ -70,10 +70,10 @@ void MemManage_Handler(void)
   */
 void BusFault_Handler(void)
 {
-    /* Go to infinite loop when Bus Fault exception occurs */
-    while (1)
-    {
-    }
+	/* Go to infinite loop when Bus Fault exception occurs */
+	while (1)
+	{
+	}
 }
 
 /**
@@ -83,10 +83,10 @@ void BusFault_Handler(void)
   */
 void UsageFault_Handler(void)
 {
-    /* Go to infinite loop when Usage Fault exception occurs */
-    while (1)
-    {
-    }
+	/* Go to infinite loop when Usage Fault exception occurs */
+	while (1)
+	{
+	}
 }
 
 /**
@@ -129,18 +129,14 @@ void DebugMon_Handler(void)
 *******************************************************************************/
 void EXTI4_IRQHandler(void)
 {
-    extern void rt_dm9000_isr(void);
-
-    /* enter interrupt */
-    rt_interrupt_enter();
-
-    /* Clear the DM9000A EXTI line pending bit */
-    EXTI_ClearITPendingBit(EXTI_Line4);
-
-    rt_dm9000_isr();
-
-    /* leave interrupt */
-    rt_interrupt_leave();
+	extern void rt_dm9000_isr(void);
+	/* enter interrupt */
+	rt_interrupt_enter();
+	/* Clear the DM9000A EXTI line pending bit */
+	EXTI_ClearITPendingBit(EXTI_Line4);
+	rt_dm9000_isr();
+	/* leave interrupt */
+	rt_interrupt_leave();
 }
 #endif /* RT_USING_LWIP */
 

@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=598833964
+Checksum=555890510
 [CodeCoverage]
 Enabled=_ 0
 [Exceptions]
@@ -32,12 +32,6 @@ SumEnabled=0
 GraphEnabled=0
 ShowTimeLog=1
 ShowTimeSum=1
-[Disassemble mode]
-mode=0
-[Breakpoints2]
-Bp0=_ 1 "STD_CODE2" "{$PROJ_DIR$\applications\startup.c}.90.5" 0 0 1 "" 0 ""
-Bp1=_ 1 "STD_CODE2" "{$PROJ_DIR$\applications\startup.c}.108.5" 0 0 1 "" 0 ""
-Count=2
 [Interrupts]
 Enabled=1
 [MemConfig]
@@ -49,8 +43,11 @@ Stop=1
 [Trace1]
 Enabled=0
 ShowSource=1
-[CallStackLog]
-Enabled=0
+[Simulator]
+Freq=10000000
+MultiCoreRunAll=1
+[JLinkDriver]
+CStepIntDis=_ 0
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -58,15 +55,18 @@ Category=_ 0
 [TermIOLog]
 LoggingEnabled=_ 0
 LogFile=_ ""
-[Aliases]
-Count=0
-SuppressDialog=0
-[Simulator]
-Freq=10000000
-MultiCoreRunAll=1
+[CallStackLog]
+Enabled=0
 [DriverProfiling]
 Enabled=0
-Mode=1
+Mode=0
 Graph=0
 Symbiont=0
 Exclusions=
+[Disassemble mode]
+mode=0
+[Breakpoints2]
+Count=0
+[Aliases]
+Count=0
+SuppressDialog=0

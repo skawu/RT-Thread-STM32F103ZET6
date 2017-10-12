@@ -17,8 +17,8 @@
 
 struct stm32_hw_pin_userdata
 {
-    int pin;
-    uint32_t mode;
+	int pin;
+	uint32_t mode;
 };
 
 #define PIN_USERDATA_END {-1,0}
