@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    11-March-2011
-  * @brief   This file contains all the functions prototypes for the DBGMCU 
+  * @brief   This file contains all the functions prototypes for the DBGMCU
   *          firmware library.
   ******************************************************************************
   * @attention
@@ -25,31 +25,31 @@
 #define __STM32F10x_DBGMCU_H
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+	/* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
 
-/** @addtogroup STM32F10x_StdPeriph_Driver
-  * @{
-  */
+	/** @addtogroup STM32F10x_StdPeriph_Driver
+	  * @{
+	  */
 
-/** @addtogroup DBGMCU
-  * @{
-  */
+	/** @addtogroup DBGMCU
+	  * @{
+	  */
 
-/** @defgroup DBGMCU_Exported_Types
-  * @{
-  */
+	/** @defgroup DBGMCU_Exported_Types
+	  * @{
+	  */
 
-/**
-  * @}
-  */
+	/**
+	  * @}
+	  */
 
-/** @defgroup DBGMCU_Exported_Constants
-  * @{
-  */
+	/** @defgroup DBGMCU_Exported_Constants
+	  * @{
+	  */
 
 #define DBGMCU_SLEEP                 ((uint32_t)0x00000001)
 #define DBGMCU_STOP                  ((uint32_t)0x00000002)
@@ -77,27 +77,27 @@
 #define DBGMCU_TIM9_STOP             ((uint32_t)0x10000000)
 #define DBGMCU_TIM10_STOP            ((uint32_t)0x20000000)
 #define DBGMCU_TIM11_STOP            ((uint32_t)0x40000000)
-                                              
+
 #define IS_DBGMCU_PERIPH(PERIPH) ((((PERIPH) & 0x800000F8) == 0x00) && ((PERIPH) != 0x00))
-/**
-  * @}
-  */ 
+	/**
+	  * @}
+	  */
 
-/** @defgroup DBGMCU_Exported_Macros
-  * @{
-  */
+	/** @defgroup DBGMCU_Exported_Macros
+	  * @{
+	  */
 
-/**
-  * @}
-  */
+	/**
+	  * @}
+	  */
 
-/** @defgroup DBGMCU_Exported_Functions
-  * @{
-  */
+	/** @defgroup DBGMCU_Exported_Functions
+	  * @{
+	  */
 
-uint32_t DBGMCU_GetREVID(void);
-uint32_t DBGMCU_GetDEVID(void);
-void DBGMCU_Config(uint32_t DBGMCU_Periph, FunctionalState NewState);
+	uint32_t DBGMCU_GetREVID(void);
+	uint32_t DBGMCU_GetDEVID(void);
+	void DBGMCU_Config(uint32_t DBGMCU_Periph, FunctionalState NewState);
 
 #ifdef __cplusplus
 }

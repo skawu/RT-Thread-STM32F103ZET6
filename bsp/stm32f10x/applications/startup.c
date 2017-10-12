@@ -42,13 +42,13 @@ extern int __bss_end;
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void assert_failed(u8* file, u32 line)
+void assert_failed(u8 *file, u32 line)
 {
-    rt_kprintf("\n\r Wrong parameter value detected on\r\n");
-    rt_kprintf("       file  %s\r\n", file);
-    rt_kprintf("       line  %d\r\n", line);
+	rt_kprintf("\n\r Wrong parameter value detected on\r\n");
+	rt_kprintf("       file  %s\r\n", file);
+	rt_kprintf("       line  %d\r\n", line);
 
-    while (1) ;
+	while (1) ;
 }
 
 /**
@@ -56,58 +56,47 @@ void assert_failed(u8* file, u32 line)
  */
 void rtthread_startup(void)
 {
-    /* init board */
-    rt_hw_board_init();
-
-    /* show version */
-    rt_show_version();
-
+	/* init board */
+	rt_hw_board_init();
+	/* show version */
+	rt_show_version();
 #ifdef RT_USING_HEAP
 #if STM32_EXT_SRAM
-    rt_system_heap_init((void*)STM32_EXT_SRAM_BEGIN, (void*)STM32_EXT_SRAM_END);
+	rt_system_heap_init((void *)STM32_EXT_SRAM_BEGIN, (void *)STM32_EXT_SRAM_END);
 #else
 #ifdef __CC_ARM
-    rt_system_heap_init((void*)&Image$$RW_IRAM1$$ZI$$Limit, (void*)STM32_SRAM_END);
+	rt_system_heap_init((void *)&Image$$RW_IRAM1$$ZI$$Limit, (void *)STM32_SRAM_END);
 #elif __ICCARM__
-    rt_system_heap_init(__segment_end("HEAP"), (void*)STM32_SRAM_END);
+	rt_system_heap_init(__segment_end("HEAP"), (void *)STM32_SRAM_END);
 #else
-    /* init memory system */
-    rt_system_heap_init((void*)&__bss_end, (void*)STM32_SRAM_END);
+	/* init memory system */
+	rt_system_heap_init((void *)&__bss_end, (void *)STM32_SRAM_END);
 #endif
 #endif  /* STM32_EXT_SRAM */
 #endif /* RT_USING_HEAP */
-
-    /* init scheduler system */
-    rt_system_scheduler_init();
-
-    /* initialize timer */
-    rt_system_timer_init();
-
-    /* init timer thread */
-    rt_system_timer_thread_init();
-
-    /* init application */
-    rt_application_init();
-
-    /* init idle thread */
-    rt_thread_idle_init();
-
-    /* start scheduler */
-    rt_system_scheduler_start();
-
-    /* never reach here */
-    return ;
+	/* init scheduler system */
+	rt_system_scheduler_init();
+	/* initialize timer */
+	rt_system_timer_init();
+	/* init timer thread */
+	rt_system_timer_thread_init();
+	/* init application */
+	rt_application_init();
+	/* init idle thread */
+	rt_thread_idle_init();
+	/* start scheduler */
+	rt_system_scheduler_start();
+	/* never reach here */
+	return ;
 }
 
 int main(void)
 {
-    /* disable interrupt first */
-    rt_hw_interrupt_disable();
-
-    /* startup RT-Thread RTOS */
-    rtthread_startup();
-
-    return 0;
+	/* disable interrupt first */
+	rt_hw_interrupt_disable();
+	/* startup RT-Thread RTOS */
+	rtthread_startup();
+	return 0;
 }
 
 /*@}*/
