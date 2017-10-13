@@ -27,9 +27,10 @@ static rt_thread_t tid1 = RT_NULL;
 static rt_thread_t tid2 = RT_NULL;
 
 /* 线程入口 */
+rt_uint32_t count = 0;		//串口看上去是同时打印tid1和tid2的数值后延时1s，而不是tid1延时1s，tid2延时1s
 static void thread_entry(void *parameter)
 {
-	rt_uint32_t count = 0;
+//	rt_uint32_t count = 0;
 	rt_uint32_t no = (rt_uint32_t) parameter;   //获取线程的入口参数
 
 	while (1)
@@ -37,7 +38,7 @@ static void thread_entry(void *parameter)
 		//打印线程计数值输出
 		rt_kprintf("thread%d count: %d\n", no, count++);
 		//休眠10个OS Tick
-		rt_thread_delay(10);
+		rt_thread_delay(100);
 	}
 }
 
