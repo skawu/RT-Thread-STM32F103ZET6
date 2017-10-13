@@ -315,6 +315,7 @@
           <state>$PROJ_DIR$\..\..\libcpu\arm\common</state>
           <state>$PROJ_DIR$\..\..\components\finsh</state>
           <state>$PROJ_DIR$\libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x</state>
+          <state>$PROJ_DIR$\applications\thread_test</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1914,6 +1915,12 @@
   </configuration>
   <group>
     <name>Applications</name>
+    <group>
+      <name>threadTest</name>
+      <file>
+        <name>$PROJ_DIR$\applications\thread_test\thread_test.c</name>
+      </file>
+    </group>
     <file>
       <name>$PROJ_DIR$\applications\application.c</name>
     </file>

@@ -41,6 +41,8 @@
 #endif
 
 #include "led.h"
+#include "thread_test.h"        //线程初始化与调用学习
+
 
 ALIGN(RT_ALIGN_SIZE)
 static rt_uint8_t led_stack[ 512 ];
@@ -144,6 +146,11 @@ int rt_application_init(void)
 	if (result == RT_EOK)
 	{
 		rt_thread_startup(&led_thread);
+	}
+
+	if (-1 == app_init_thread_test())
+	{
+		return -1;
 	}
 
 #if (RT_THREAD_PRIORITY_MAX == 32)

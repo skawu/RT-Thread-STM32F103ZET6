@@ -172,6 +172,12 @@
   </configuration>
   <group>
     <name>Applications</name>
+    <group>
+      <name>threadTest</name>
+      <file>
+        <name>$PROJ_DIR$\applications\thread_test\thread_test.c</name>
+      </file>
+    </group>
     <file>
       <name>$PROJ_DIR$\applications\application.c</name>
     </file>

@@ -1,12 +1,6 @@
----- FINSH_USING_SYMTAB Matches (11 in 6 files) ----
-Cmd.c (e:\0_rtt\rt-thread-stm32f103zet6\components\finsh):#if defined(FINSH_USING_SYMTAB) && !defined(FINSH_USING_MSH_ONLY)
-Finsh.h (e:\0_rtt\rt-thread-stm32f103zet6\components\finsh):#if defined(FINSH_USING_DESCRIPTION) && defined(FINSH_USING_SYMTAB)
-Finsh.h (e:\0_rtt\rt-thread-stm32f103zet6\components\finsh):#if defined(FINSH_USING_DESCRIPTION) && defined(FINSH_USING_SYMTAB)
-Finsh.h (e:\0_rtt\rt-thread-stm32f103zet6\components\finsh):#ifdef FINSH_USING_SYMTAB
-Finsh.h (e:\0_rtt\rt-thread-stm32f103zet6\components\finsh):#endif /* end of FINSH_USING_SYMTAB */
-Rtconfig.h (e:\0_rtt\rt-thread-stm32f103zet6\bsp\stm32f10x):#define FINSH_USING_SYMTAB
-Rtdef.h (e:\0_rtt\rt-thread-stm32f103zet6\include):#elif !defined(FINSH_USING_SYMTAB)
-Shell.c (e:\0_rtt\rt-thread-stm32f103zet6\components\finsh):#ifdef FINSH_USING_SYMTAB
-Shell.c (e:\0_rtt\rt-thread-stm32f103zet6\components\finsh):#ifdef FINSH_USING_SYMTAB
-Shell.c (e:\0_rtt\rt-thread-stm32f103zet6\components\finsh):#ifdef FINSH_USING_SYMTAB
-Symbol.c (e:\0_rtt\rt-thread-stm32f103zet6\components\finsh):#ifdef FINSH_USING_SYMTAB
+---- thread_entry Matches (5 in 3 files) ----
+backtrace.c (F:\0_0RTT\rt-thread\libcpu\arm\common):void rt_hw_backtrace(rt_uint32_t *fp, rt_uint32_t thread_entry)
+backtrace.c (F:\0_0RTT\rt-thread\libcpu\arm\common):		if((func_entry == thread_entry))
+backtrace.c (F:\0_0RTT\rt-thread\libcpu\arm\common):void rt_hw_backtrace(rt_uint32_t *fp, rt_uint32_t thread_entry)
+rthw.h (F:\0_0RTT\rt-thread\include):void rt_hw_backtrace(rt_uint32_t *fp, rt_uint32_t thread_entry);
+thread_test.c (F:\0_0RTT\rt-thread\bsp\stm32f10x\applications\thread_test):void thread_entry(void *parameter)
