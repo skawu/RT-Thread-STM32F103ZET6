@@ -1,6 +1,0 @@
----- thread_entry Matches (5 in 3 files) ----
-backtrace.c (F:\0_0RTT\rt-thread\libcpu\arm\common):void rt_hw_backtrace(rt_uint32_t *fp, rt_uint32_t thread_entry)
-backtrace.c (F:\0_0RTT\rt-thread\libcpu\arm\common):		if((func_entry == thread_entry))
-backtrace.c (F:\0_0RTT\rt-thread\libcpu\arm\common):void rt_hw_backtrace(rt_uint32_t *fp, rt_uint32_t thread_entry)
-rthw.h (F:\0_0RTT\rt-thread\include):void rt_hw_backtrace(rt_uint32_t *fp, rt_uint32_t thread_entry);
-thread_test.c (F:\0_0RTT\rt-thread\bsp\stm32f10x\applications\thread_test):void thread_entry(void *parameter)
