@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=1829805262
+Checksum=101010807
 [CodeCoverage]
 Enabled=_ 0
 [Exceptions]
@@ -50,10 +50,6 @@ MultiCoreRunAll=1
 CStepIntDis=_ 0
 [RecentFlashDownload]
 Path=F:\0_0RTT\rt-thread\bsp\stm32f10x\Debug\Exe\project.out
-[Disassemble mode]
-mode=0
-[Breakpoints2]
-Count=0
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -61,9 +57,6 @@ Category=_ 0
 [TermIOLog]
 LoggingEnabled=_ 0
 LogFile=_ ""
-[Aliases]
-Count=0
-SuppressDialog=0
 [CallStackLog]
 Enabled=0
 [DriverProfiling]
@@ -72,3 +65,10 @@ Mode=0
 Graph=0
 Symbiont=0
 Exclusions=
+[Disassemble mode]
+mode=0
+[Breakpoints2]
+Count=0
+[Aliases]
+Count=0
+SuppressDialog=0
