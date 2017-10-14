@@ -21,7 +21,7 @@
  * Date           Author        Notes
  * 2012-02-26     weety         first version
  */
- 
+
 #ifndef __SDIO_FUNC_IDS_H__
 #define __SDIO_FUNC_IDS_H__
 
@@ -29,7 +29,7 @@
 extern "C" {
 #endif
 
-/* Standard SDIO Function Interfaces */
+	/* Standard SDIO Function Interfaces */
 
 #define SDIO_FUNC_CODE_NONE        0x00 /* Not a SDIO standard interface */
 #define SDIO_FUNC_CODE_UART        0x01 /* SDIO Standard UART */
@@ -41,7 +41,7 @@ extern "C" {
 #define SDIO_FUNC_CODE_WLAN        0x07 /* SDIO WLAN interface */
 #define SDIO_FUNC_CODE_ATA         0x08 /* Embedded SDIO-ATA standard interface */
 
-/* manufacturer id, product io */
+	/* manufacturer id, product io */
 
 #define SDIO_MANUFACTURER_ID_MARVELL        0x02df
 #define SDIO_PRODUCT_ID_MARVELL_88W8686     0x9103

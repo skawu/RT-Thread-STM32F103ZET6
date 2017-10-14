@@ -165,9 +165,9 @@ extern "C" {
 #define USB_REMOTE_WAKEUP               1
 #define USB_EP_HALT                     0
 
-/*
- * Port feature numbers
- */
+	/*
+	 * Port feature numbers
+	 */
 #define PORT_FEAT_CONNECTION            0
 #define PORT_FEAT_ENABLE                1
 #define PORT_FEAT_SUSPEND               2
@@ -182,15 +182,15 @@ extern "C" {
 #define PORT_FEAT_C_OVER_CURRENT        19
 #define PORT_FEAT_C_RESET               20
 
-/*
-    The HcRhPortStatus[1:NDP] register is used to control and report port events on a per-port
-    basis. NumberDownstreamPorts represents the number of HcRhPortStatus registers that are
-    implemented in hardware.  The lower word is used to reflect the port status, whereas the upper
-    word reflects the status change bits.  Some status bits are implemented with special write behavior
-    (see below).  If a transaction (token through handshake) is in progress when a write to change
-    port status occurs, the resulting port status change must be postponed until the transaction
-    completes.  Reserved bits should always be written '0'.
-*/
+	/*
+	    The HcRhPortStatus[1:NDP] register is used to control and report port events on a per-port
+	    basis. NumberDownstreamPorts represents the number of HcRhPortStatus registers that are
+	    implemented in hardware.  The lower word is used to reflect the port status, whereas the upper
+	    word reflects the status change bits.  Some status bits are implemented with special write behavior
+	    (see below).  If a transaction (token through handshake) is in progress when a write to change
+	    port status occurs, the resulting port status change must be postponed until the transaction
+	    completes.  Reserved bits should always be written '0'.
+	*/
 #define PORT_CCS                        0x00000001UL    /* R:CurrentConnectStatus - W:ClearPortEnable    */
 #define PORT_PES                        0x00000002UL    /* R:PortEnableStatus - W:SetPortEnable             */
 #define PORT_PSS                        0x00000004UL    /* R:PortSuspendStatus - W:SetPortSuspend        */
@@ -204,9 +204,9 @@ extern "C" {
 #define PORT_POCIC                      0x00080000UL
 #define PORT_PRSC                       0x00100000UL
 
-/*
- *Hub Status & Hub Change bit masks
- */
+	/*
+	 *Hub Status & Hub Change bit masks
+	 */
 #define HUB_STATUS_LOCAL_POWER          0x0001
 #define HUB_STATUS_OVERCURRENT          0x0002
 
@@ -218,179 +218,179 @@ extern "C" {
 #define USB_EP_DIR(addr)                ((addr & USB_DIR_MASK)>>7)
 
 #define uswap_32(x) \
-    ((((x) & 0xff000000) >> 24) | \
-     (((x) & 0x00ff0000) >>  8) | \
-     (((x) & 0x0000ff00) <<  8) | \
-     (((x) & 0x000000ff) << 24))
+	((((x) & 0xff000000) >> 24) | \
+	 (((x) & 0x00ff0000) >>  8) | \
+	 (((x) & 0x0000ff00) <<  8) | \
+	 (((x) & 0x000000ff) << 24))
 
 #define  uswap_8(x) \
-    (((rt_uint16_t)(*((rt_uint8_t *)(x)))) + \
-    (((rt_uint16_t)(*(((rt_uint8_t *)(x)) + 1))) << 8))
+	(((rt_uint16_t)(*((rt_uint8_t *)(x)))) + \
+	 (((rt_uint16_t)(*(((rt_uint8_t *)(x)) + 1))) << 8))
 
-typedef void (*func_callback)(void *context);
-typedef enum
-{
-    USB_STATE_NOTATTACHED = 0,
-    USB_STATE_ATTACHED,
-    USB_STATE_POWERED,
-    USB_STATE_RECONNECTING,
-    USB_STATE_UNAUTHENTICATED,
-    USB_STATE_DEFAULT,
-    USB_STATE_ADDRESS,
-    USB_STATE_CONFIGURED,
-    USB_STATE_SUSPENDED
-}udevice_state_t;
+	typedef void (*func_callback)(void *context);
+	typedef enum
+	{
+	    USB_STATE_NOTATTACHED = 0,
+	    USB_STATE_ATTACHED,
+	    USB_STATE_POWERED,
+	    USB_STATE_RECONNECTING,
+	    USB_STATE_UNAUTHENTICATED,
+	    USB_STATE_DEFAULT,
+	    USB_STATE_ADDRESS,
+	    USB_STATE_CONFIGURED,
+	    USB_STATE_SUSPENDED
+	} udevice_state_t;
 
 #pragma pack(1)
 
-struct usb_descriptor
-{
-    rt_uint8_t bLength;
-    rt_uint8_t type;
-};
-typedef struct usb_descriptor* udesc_t;
+	struct usb_descriptor
+	{
+		rt_uint8_t bLength;
+		rt_uint8_t type;
+	};
+	typedef struct usb_descriptor *udesc_t;
 
-struct udevice_descriptor
-{
-    rt_uint8_t bLength;
-    rt_uint8_t type;
-    rt_uint16_t bcdUSB;
-    rt_uint8_t bDeviceClass;
-    rt_uint8_t bDeviceSubClass;
-    rt_uint8_t bDeviceProtocol;
-    rt_uint8_t bMaxPacketSize0;
-    rt_uint16_t idVendor;
-    rt_uint16_t idProduct;
-    rt_uint16_t bcdDevice;
-    rt_uint8_t iManufacturer;
-    rt_uint8_t iProduct;
-    rt_uint8_t iSerialNumber;
-    rt_uint8_t bNumConfigurations;
-};
-typedef struct udevice_descriptor* udev_desc_t;
+	struct udevice_descriptor
+	{
+		rt_uint8_t bLength;
+		rt_uint8_t type;
+		rt_uint16_t bcdUSB;
+		rt_uint8_t bDeviceClass;
+		rt_uint8_t bDeviceSubClass;
+		rt_uint8_t bDeviceProtocol;
+		rt_uint8_t bMaxPacketSize0;
+		rt_uint16_t idVendor;
+		rt_uint16_t idProduct;
+		rt_uint16_t bcdDevice;
+		rt_uint8_t iManufacturer;
+		rt_uint8_t iProduct;
+		rt_uint8_t iSerialNumber;
+		rt_uint8_t bNumConfigurations;
+	};
+	typedef struct udevice_descriptor *udev_desc_t;
 
-struct uconfig_descriptor
-{
-    rt_uint8_t bLength;
-    rt_uint8_t type;
-    rt_uint16_t wTotalLength;
-    rt_uint8_t bNumInterfaces;
-    rt_uint8_t bConfigurationValue;
-    rt_uint8_t iConfiguration;
-    rt_uint8_t bmAttributes;
-    rt_uint8_t MaxPower;
-    rt_uint8_t data[256];
-};
-typedef struct uconfig_descriptor* ucfg_desc_t;
+	struct uconfig_descriptor
+	{
+		rt_uint8_t bLength;
+		rt_uint8_t type;
+		rt_uint16_t wTotalLength;
+		rt_uint8_t bNumInterfaces;
+		rt_uint8_t bConfigurationValue;
+		rt_uint8_t iConfiguration;
+		rt_uint8_t bmAttributes;
+		rt_uint8_t MaxPower;
+		rt_uint8_t data[256];
+	};
+	typedef struct uconfig_descriptor *ucfg_desc_t;
 
-struct uinterface_descriptor
-{
-    rt_uint8_t bLength;
-    rt_uint8_t type;
-    rt_uint8_t bInterfaceNumber;
-    rt_uint8_t bAlternateSetting;
-    rt_uint8_t bNumEndpoints;
-    rt_uint8_t bInterfaceClass;
-    rt_uint8_t bInterfaceSubClass;
-    rt_uint8_t bInterfaceProtocol;
-    rt_uint8_t iInterface;
-};
-typedef struct uinterface_descriptor* uintf_desc_t;
+	struct uinterface_descriptor
+	{
+		rt_uint8_t bLength;
+		rt_uint8_t type;
+		rt_uint8_t bInterfaceNumber;
+		rt_uint8_t bAlternateSetting;
+		rt_uint8_t bNumEndpoints;
+		rt_uint8_t bInterfaceClass;
+		rt_uint8_t bInterfaceSubClass;
+		rt_uint8_t bInterfaceProtocol;
+		rt_uint8_t iInterface;
+	};
+	typedef struct uinterface_descriptor *uintf_desc_t;
 
-/* Interface Association Descriptor (IAD) */
-struct uiad_descriptor
-{
-    rt_uint8_t bLength;
-    rt_uint8_t bDescriptorType;
-    rt_uint8_t bFirstInterface;
-    rt_uint8_t bInterfaceCount;
-    rt_uint8_t bFunctionClass;
-    rt_uint8_t bFunctionSubClass;
-    rt_uint8_t bFunctionProtocol;
-    rt_uint8_t iFunction;
-};
-typedef struct uiad_descriptor* uiad_desc_t;
+	/* Interface Association Descriptor (IAD) */
+	struct uiad_descriptor
+	{
+		rt_uint8_t bLength;
+		rt_uint8_t bDescriptorType;
+		rt_uint8_t bFirstInterface;
+		rt_uint8_t bInterfaceCount;
+		rt_uint8_t bFunctionClass;
+		rt_uint8_t bFunctionSubClass;
+		rt_uint8_t bFunctionProtocol;
+		rt_uint8_t iFunction;
+	};
+	typedef struct uiad_descriptor *uiad_desc_t;
 
-struct uendpoint_descriptor
-{
-    rt_uint8_t bLength;
-    rt_uint8_t type;
-    rt_uint8_t bEndpointAddress;
-    rt_uint8_t bmAttributes;
-    rt_uint16_t wMaxPacketSize;
-    rt_uint8_t bInterval;
-};
-typedef struct uendpoint_descriptor* uep_desc_t;
+	struct uendpoint_descriptor
+	{
+		rt_uint8_t bLength;
+		rt_uint8_t type;
+		rt_uint8_t bEndpointAddress;
+		rt_uint8_t bmAttributes;
+		rt_uint16_t wMaxPacketSize;
+		rt_uint8_t bInterval;
+	};
+	typedef struct uendpoint_descriptor *uep_desc_t;
 
-struct ustring_descriptor
-{
-    rt_uint8_t bLength;
-    rt_uint8_t type;
-    rt_uint8_t String[64];
-};
-typedef struct ustring_descriptor* ustr_desc_t;
+	struct ustring_descriptor
+	{
+		rt_uint8_t bLength;
+		rt_uint8_t type;
+		rt_uint8_t String[64];
+	};
+	typedef struct ustring_descriptor *ustr_desc_t;
 
-struct uhub_descriptor
-{
-    rt_uint8_t length;
-    rt_uint8_t type;
-    rt_uint8_t num_ports;
-    rt_uint16_t characteristics;
-    rt_uint8_t pwron_to_good;        /* power on to power good */
-    rt_uint8_t current;
-    rt_uint8_t removable[8];
-    rt_uint8_t pwr_ctl[8];
-};
-typedef struct uhub_descriptor* uhub_desc_t;
+	struct uhub_descriptor
+	{
+		rt_uint8_t length;
+		rt_uint8_t type;
+		rt_uint8_t num_ports;
+		rt_uint16_t characteristics;
+		rt_uint8_t pwron_to_good;        /* power on to power good */
+		rt_uint8_t current;
+		rt_uint8_t removable[8];
+		rt_uint8_t pwr_ctl[8];
+	};
+	typedef struct uhub_descriptor *uhub_desc_t;
 
-/* USB_DESC_TYPE_DEVICEQUALIFIER: Device Qualifier descriptor */
-struct usb_qualifier_descriptor
-{
-    rt_uint8_t  bLength;
-    rt_uint8_t  bDescriptorType;
+	/* USB_DESC_TYPE_DEVICEQUALIFIER: Device Qualifier descriptor */
+	struct usb_qualifier_descriptor
+	{
+		rt_uint8_t  bLength;
+		rt_uint8_t  bDescriptorType;
 
-    rt_uint16_t bcdUSB; // TODO: big-endian.
-    rt_uint8_t  bDeviceClass;
-    rt_uint8_t  bDeviceSubClass;
-    rt_uint8_t  bDeviceProtocol;
-    rt_uint8_t  bMaxPacketSize0;
-    rt_uint8_t  bNumConfigurations;
-    rt_uint8_t  bRESERVED;
-} __attribute__ ((packed));
+		rt_uint16_t bcdUSB; // TODO: big-endian.
+		rt_uint8_t  bDeviceClass;
+		rt_uint8_t  bDeviceSubClass;
+		rt_uint8_t  bDeviceProtocol;
+		rt_uint8_t  bMaxPacketSize0;
+		rt_uint8_t  bNumConfigurations;
+		rt_uint8_t  bRESERVED;
+	} __attribute__((packed));
 
-struct uhid_descriptor
-{
-    rt_uint8_t bLength;
-    rt_uint8_t type;
-    rt_uint16_t bcdHID;
-    rt_uint8_t bCountryCode;
-    rt_uint8_t bNumDescriptors;
-    struct hid_descriptor_list
-    {
-        rt_uint8_t type;
-        rt_uint16_t wLength;
-    }Descriptor[1];
-};
-typedef struct uhid_descriptor* uhid_desc_t;
+	struct uhid_descriptor
+	{
+		rt_uint8_t bLength;
+		rt_uint8_t type;
+		rt_uint16_t bcdHID;
+		rt_uint8_t bCountryCode;
+		rt_uint8_t bNumDescriptors;
+		struct hid_descriptor_list
+		{
+			rt_uint8_t type;
+			rt_uint16_t wLength;
+		} Descriptor[1];
+	};
+	typedef struct uhid_descriptor *uhid_desc_t;
 
-struct urequest
-{
-    rt_uint8_t request_type;
-    rt_uint8_t request;
-    rt_uint16_t value;
-    rt_uint16_t index;
-    rt_uint16_t length;
-};
-typedef struct urequest* ureq_t;
+	struct urequest
+	{
+		rt_uint8_t request_type;
+		rt_uint8_t request;
+		rt_uint16_t value;
+		rt_uint16_t index;
+		rt_uint16_t length;
+	};
+	typedef struct urequest *ureq_t;
 
 #ifndef MIN
 #define MIN(a, b) (a < b ? a : b)
 #define MAX(a, b) (a > b ? a : b)
 #endif
 
-/*
- * the define related to mass storage
- */
+	/*
+	 * the define related to mass storage
+	 */
 #define USBREQ_GET_MAX_LUN              0xfe
 #define USBREQ_MASS_STORAGE_RESET       0xff
 
@@ -422,38 +422,38 @@ typedef struct urequest* ureq_t;
 #define CSW_SIGNATURE                   0x53425355
 #define CBW_TAG_VALUE                   0x12345678
 
-struct ustorage_cbw
-{
-    rt_uint32_t signature;
-    rt_uint32_t tag;
-    rt_uint32_t xfer_len;
-    rt_uint8_t dflags;
-    rt_uint8_t lun;
-    rt_uint8_t cb_len;
-    rt_uint8_t cb[16];
-};
-typedef struct ustorage_cbw* ustorage_cbw_t;
+	struct ustorage_cbw
+	{
+		rt_uint32_t signature;
+		rt_uint32_t tag;
+		rt_uint32_t xfer_len;
+		rt_uint8_t dflags;
+		rt_uint8_t lun;
+		rt_uint8_t cb_len;
+		rt_uint8_t cb[16];
+	};
+	typedef struct ustorage_cbw *ustorage_cbw_t;
 
-struct ustorage_csw
-{
-    rt_uint32_t signature;
-    rt_uint32_t tag;
-    rt_int32_t data_reside;
-    rt_uint8_t  status;
-};
-typedef struct ustorage_csw* ustorage_csw_t;
+	struct ustorage_csw
+	{
+		rt_uint32_t signature;
+		rt_uint32_t tag;
+		rt_int32_t data_reside;
+		rt_uint8_t  status;
+	};
+	typedef struct ustorage_csw *ustorage_csw_t;
 
 #pragma pack()
 
-/*
- * USB device event loop thread configurations
- */
-/* the stack size of USB thread */
+	/*
+	 * USB device event loop thread configurations
+	 */
+	/* the stack size of USB thread */
 #ifndef RT_USBD_THREAD_STACK_SZ
 #define RT_USBD_THREAD_STACK_SZ 2048
 #endif
 
-/* the priority of USB thread */
+	/* the priority of USB thread */
 #ifndef RT_USBD_THREAD_PRIO
 #define RT_USBD_THREAD_PRIO 8
 #endif

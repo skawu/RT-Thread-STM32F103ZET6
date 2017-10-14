@@ -86,32 +86,32 @@
 
 /* Default config for serial_configure structure */
 #define RT_SERIAL_CONFIG_DEFAULT           \
-{                                          \
-    BAUD_RATE_115200, /* 115200 bits/s */  \
-    DATA_BITS_8,      /* 8 databits */     \
-    STOP_BITS_1,      /* 1 stopbit */      \
-    PARITY_NONE,      /* No parity  */     \
-    BIT_ORDER_LSB,    /* LSB first sent */ \
-    NRZ_NORMAL,       /* Normal mode */    \
-    RT_SERIAL_RB_BUFSZ, /* Buffer size */  \
-    0                                      \
-}
+	{                                          \
+		BAUD_RATE_115200, /* 115200 bits/s */  \
+		DATA_BITS_8,      /* 8 databits */     \
+		STOP_BITS_1,      /* 1 stopbit */      \
+		PARITY_NONE,      /* No parity  */     \
+		BIT_ORDER_LSB,    /* LSB first sent */ \
+		NRZ_NORMAL,       /* Normal mode */    \
+		RT_SERIAL_RB_BUFSZ, /* Buffer size */  \
+		0                                      \
+	}
 
 struct serial_configure
 {
-    rt_uint32_t baud_rate;
+	rt_uint32_t baud_rate;
 
-    rt_uint32_t data_bits               :4;
-    rt_uint32_t stop_bits               :2;
-    rt_uint32_t parity                  :2;
-    rt_uint32_t bit_order               :1;
-    rt_uint32_t invert                  :1;
-	rt_uint32_t bufsz					:16;
-    rt_uint32_t reserved                :4;
+	rt_uint32_t data_bits               : 4;
+	rt_uint32_t stop_bits               : 2;
+	rt_uint32_t parity                  : 2;
+	rt_uint32_t bit_order               : 1;
+	rt_uint32_t invert                  : 1;
+	rt_uint32_t bufsz					: 16;
+	rt_uint32_t reserved                : 4;
 };
 
 /*
- * Serial FIFO mode 
+ * Serial FIFO mode
  */
 struct rt_serial_rx_fifo
 {
@@ -126,7 +126,7 @@ struct rt_serial_tx_fifo
 	struct rt_completion completion;
 };
 
-/* 
+/*
  * Serial DMA mode
  */
 struct rt_serial_rx_dma
@@ -142,10 +142,10 @@ struct rt_serial_tx_dma
 
 struct rt_serial_device
 {
-    struct rt_device          parent;
+	struct rt_device          parent;
 
-    const struct rt_uart_ops *ops;
-    struct serial_configure   config;
+	const struct rt_uart_ops *ops;
+	struct serial_configure   config;
 
 	void *serial_rx;
 	void *serial_tx;
@@ -157,13 +157,13 @@ typedef struct rt_serial_device rt_serial_t;
  */
 struct rt_uart_ops
 {
-    rt_err_t (*configure)(struct rt_serial_device *serial, struct serial_configure *cfg);
-    rt_err_t (*control)(struct rt_serial_device *serial, int cmd, void *arg);
+	rt_err_t (*configure)(struct rt_serial_device *serial, struct serial_configure *cfg);
+	rt_err_t (*control)(struct rt_serial_device *serial, int cmd, void *arg);
 
-    int (*putc)(struct rt_serial_device *serial, char c);
-    int (*getc)(struct rt_serial_device *serial);
+	int (*putc)(struct rt_serial_device *serial, char c);
+	int (*getc)(struct rt_serial_device *serial);
 
-    rt_size_t (*dma_transmit)(struct rt_serial_device *serial, const rt_uint8_t *buf, rt_size_t size, int direction);
+	rt_size_t (*dma_transmit)(struct rt_serial_device *serial, const rt_uint8_t *buf, rt_size_t size, int direction);
 };
 
 void rt_hw_serial_isr(struct rt_serial_device *serial, int event);

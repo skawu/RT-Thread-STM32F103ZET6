@@ -35,6 +35,7 @@
 
 #include <rtthread.h>
 #include <rthw.h>
+#include "lcd.h"
 
 /* use precision */
 #define RT_PRINTF_PRECISION
@@ -526,15 +527,14 @@ RTM_EXPORT(rt_show_version);
 
 void rt_show_mcu_id(void)
 {
-    unsigned int mcu_id[3];
-    unsigned short mcu_flash_size;
-
-    mcu_id[0] = *(unsigned int*)(0x1FFFF7E8);
-    mcu_id[1] = *(unsigned int*)(0x1FFFF7EC);
-    mcu_id[2] = *(unsigned int*)(0x1FFFF7F0);
-    rt_kprintf("MCU ID: %X %X %X\n",mcu_id[0],mcu_id[1],mcu_id[2]);
-    mcu_flash_size = *(unsigned short*)(0x1FFFF7E0);
-    rt_kprintf("MCU Flash size: %d K\n",mcu_flash_size);
+	unsigned int mcu_id[3];
+	unsigned short mcu_flash_size;
+	mcu_id[0] = *(unsigned int *)(0x1FFFF7E8);
+	mcu_id[1] = *(unsigned int *)(0x1FFFF7EC);
+	mcu_id[2] = *(unsigned int *)(0x1FFFF7F0);
+	rt_kprintf("MCU ID: %X %X %X\n", mcu_id[0], mcu_id[1], mcu_id[2]);
+	mcu_flash_size = *(unsigned short *)(0x1FFFF7E0);
+	rt_kprintf("MCU Flash size: %d K\n", mcu_flash_size);
 }
 RTM_EXPORT(rt_show_mcu_id);
 
@@ -1185,6 +1185,7 @@ void rt_kprintf(const char *fmt, ...)
 		rt_uint16_t old_flag = _console_device->open_flag;
 		_console_device->open_flag |= RT_DEVICE_FLAG_STREAM;
 		rt_device_write(_console_device, 0, rt_log_buf, length);
+		rt_lcd_ascii_display(rt_log_buf);
 		_console_device->open_flag = old_flag;
 	}
 

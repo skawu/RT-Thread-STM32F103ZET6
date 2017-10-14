@@ -20,7 +20,7 @@
     但是它们的入口参数不同
 
     二、任务间同步与通信
-    
+
     关闭中断进行全局变量的访问，关闭中断会导致整个系统不能响应外部中断，
     所以需保证关闭中断的时间非常短。
 */
@@ -47,10 +47,10 @@ static void thread_entry(void *parameter)
 
 	while (1)
 	{
-	    //关闭中断
+		//关闭中断
 		level = rt_hw_interrupt_disable();
 		count += no;
-        //恢复中断
+		//恢复中断
 		rt_hw_interrupt_enable(level);
 		//打印线程计数值输出
 		rt_kprintf("thread%d count: %d\n", no, count);

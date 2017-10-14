@@ -6,8 +6,8 @@
 /* TFT结构体 */
 typedef struct
 {
-    u16 tft_cmd;
-    u16 tft_dat;
+	u16 tft_cmd;
+	u16 tft_dat;
 } tft_typedef;
 
 /* 使用NOR/SRAM的Bank1,sector4,地址位HADDR[27,26]=11 A10作为数据命令区分线 */
@@ -39,6 +39,7 @@ void lcd_wrdat(u16 dat);
 void GUI_Show12ASCII(uint16_t x, uint16_t y, uint8_t *p,
                      uint16_t wordColor, uint16_t backColor);
 
+void rt_lcd_ascii_display(char *dat);
 
 
 

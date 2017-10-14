@@ -31,7 +31,7 @@
 
 #include <finsh.h>
 
-int finsh_parser_init(struct finsh_parser* self);
-void finsh_parser_run(struct finsh_parser* self, const u_char* string);
+int finsh_parser_init(struct finsh_parser *self);
+void finsh_parser_run(struct finsh_parser *self, const u_char *string);
 
 #endif

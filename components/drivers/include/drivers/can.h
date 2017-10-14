@@ -58,79 +58,79 @@ enum CANBAUD
 
 struct rt_can_filter_item
 {
-    rt_uint32_t id  : 29;
-    rt_uint32_t ide : 1;
-    rt_uint32_t rtr : 1;
-    rt_uint32_t mode : 1;
-    rt_uint32_t mask;
-    rt_int32_t hdr;
+	rt_uint32_t id  : 29;
+	rt_uint32_t ide : 1;
+	rt_uint32_t rtr : 1;
+	rt_uint32_t mode : 1;
+	rt_uint32_t mask;
+	rt_int32_t hdr;
 #ifdef RT_CAN_USING_HDR
-    rt_err_t (*ind)(rt_device_t dev, void *args , rt_int32_t hdr, rt_size_t size);
-    void *args;
+	rt_err_t (*ind)(rt_device_t dev, void *args , rt_int32_t hdr, rt_size_t size);
+	void *args;
 #endif /*RT_CAN_USING_HDR*/
 };
 
 #ifdef RT_CAN_USING_HDR
 #define RT_CAN_FILTER_ITEM_INIT(id,ide,rtr,mode,mask,ind,args) \
-     {(id), (ide), (rtr), (mode), (mask), -1, (ind), (args)}
+	{(id), (ide), (rtr), (mode), (mask), -1, (ind), (args)}
 #define RT_CAN_FILTER_STD_INIT(id,ind,args) \
-     RT_CAN_FILTER_ITEM_INIT(id,0,0,0,0xFFFFFFFF,ind,args)
+	RT_CAN_FILTER_ITEM_INIT(id,0,0,0,0xFFFFFFFF,ind,args)
 #define RT_CAN_FILTER_EXT_INIT(id,ind,args) \
-     RT_CAN_FILTER_ITEM_INIT(id,1,0,0,0xFFFFFFFF,ind,args)
+	RT_CAN_FILTER_ITEM_INIT(id,1,0,0,0xFFFFFFFF,ind,args)
 #define RT_CAN_STD_RMT_FILTER_INIT(id,ind,args) \
-     RT_CAN_FILTER_ITEM_INIT(id,0,1,0,0xFFFFFFFF,ind,args)
+	RT_CAN_FILTER_ITEM_INIT(id,0,1,0,0xFFFFFFFF,ind,args)
 #define RT_CAN_EXT_RMT_FILTER_INIT(id,ind,args) \
-     RT_CAN_FILTER_ITEM_INIT(id,1,1,0,0xFFFFFFFF,ind,args)
+	RT_CAN_FILTER_ITEM_INIT(id,1,1,0,0xFFFFFFFF,ind,args)
 #define RT_CAN_STD_RMT_DATA_FILTER_INIT(id,ind,args) \
-     RT_CAN_FILTER_ITEM_INIT(id,0,0,1,0xFFFFFFFF,ind,args)
+	RT_CAN_FILTER_ITEM_INIT(id,0,0,1,0xFFFFFFFF,ind,args)
 #define RT_CAN_EXT_RMT_DATA_FILTER_INIT(id,ind,args) \
-     RT_CAN_FILTER_ITEM_INIT(id,1,0,1,0xFFFFFFFF,ind,args)
+	RT_CAN_FILTER_ITEM_INIT(id,1,0,1,0xFFFFFFFF,ind,args)
 #else
 
 #define RT_CAN_FILTER_ITEM_INIT(id,ide,rtr,mode,mask) \
-     {(id), (ide), (rtr), (mode), (mask), -1, }
+	{(id), (ide), (rtr), (mode), (mask), -1, }
 #define RT_CAN_FILTER_STD_INIT(id) \
-     RT_CAN_FILTER_ITEM_INIT(id,0,0,0,0xFFFFFFFF)
+	RT_CAN_FILTER_ITEM_INIT(id,0,0,0,0xFFFFFFFF)
 #define RT_CAN_FILTER_EXT_INIT(id) \
-     RT_CAN_FILTER_ITEM_INIT(id,1,0,0,0xFFFFFFFF)
+	RT_CAN_FILTER_ITEM_INIT(id,1,0,0,0xFFFFFFFF)
 #define RT_CAN_STD_RMT_FILTER_INIT(id) \
-     RT_CAN_FILTER_ITEM_INIT(id,0,1,0,0xFFFFFFFF)
+	RT_CAN_FILTER_ITEM_INIT(id,0,1,0,0xFFFFFFFF)
 #define RT_CAN_EXT_RMT_FILTER_INIT(id) \
-     RT_CAN_FILTER_ITEM_INIT(id,1,1,0,0xFFFFFFFF)
+	RT_CAN_FILTER_ITEM_INIT(id,1,1,0,0xFFFFFFFF)
 #define RT_CAN_STD_RMT_DATA_FILTER_INIT(id) \
-     RT_CAN_FILTER_ITEM_INIT(id,0,0,1,0xFFFFFFFF)
+	RT_CAN_FILTER_ITEM_INIT(id,0,0,1,0xFFFFFFFF)
 #define RT_CAN_EXT_RMT_DATA_FILTER_INIT(id) \
-     RT_CAN_FILTER_ITEM_INIT(id,1,0,1,0xFFFFFFFF)
+	RT_CAN_FILTER_ITEM_INIT(id,1,0,1,0xFFFFFFFF)
 #endif
 
 struct rt_can_filter_config
 {
-    rt_uint32_t count;
-    rt_uint32_t actived;
-    struct rt_can_filter_item *items;
+	rt_uint32_t count;
+	rt_uint32_t actived;
+	struct rt_can_filter_item *items;
 };
 
 struct can_configure
 {
-    rt_uint32_t baud_rate;
-    rt_uint32_t msgboxsz;
-    rt_uint32_t sndboxnumber;
-    rt_uint32_t mode      : 8;
-    rt_uint32_t privmode  : 8;
-    rt_uint32_t reserved  : 16;
-    rt_uint32_t ticks;
+	rt_uint32_t baud_rate;
+	rt_uint32_t msgboxsz;
+	rt_uint32_t sndboxnumber;
+	rt_uint32_t mode      : 8;
+	rt_uint32_t privmode  : 8;
+	rt_uint32_t reserved  : 16;
+	rt_uint32_t ticks;
 #ifdef RT_CAN_USING_HDR
-    rt_uint32_t maxhdr;
+	rt_uint32_t maxhdr;
 #endif
 };
 
 #define CANDEFAULTCONFIG \
-{\
-        CAN1MBaud,\
-        RT_CANMSG_BOX_SZ,\
-        RT_CANSND_BOX_NUM,\
-        RT_CAN_MODE_NORMAL,\
-};
+	{\
+		CAN1MBaud,\
+		RT_CANMSG_BOX_SZ,\
+		RT_CANSND_BOX_NUM,\
+		RT_CAN_MODE_NORMAL,\
+	};
 
 struct rt_can_ops;
 #define RT_CAN_CMD_SET_FILTER       0x13
@@ -163,61 +163,61 @@ enum RT_CAN_BUS_ERR
 
 struct rt_can_status
 {
-    rt_uint32_t rcverrcnt;
-    rt_uint32_t snderrcnt;
-    rt_uint32_t errcode;
-    rt_uint32_t rcvpkg;
-    rt_uint32_t dropedrcvpkg;
-    rt_uint32_t sndpkg;
-    rt_uint32_t dropedsndpkg;
-    rt_uint32_t bitpaderrcnt;
-    rt_uint32_t formaterrcnt;
-    rt_uint32_t ackerrcnt;
-    rt_uint32_t biterrcnt;
-    rt_uint32_t crcerrcnt;
-    rt_uint32_t rcvchange;
-    rt_uint32_t sndchange;
-    rt_uint32_t lasterrtype;
+	rt_uint32_t rcverrcnt;
+	rt_uint32_t snderrcnt;
+	rt_uint32_t errcode;
+	rt_uint32_t rcvpkg;
+	rt_uint32_t dropedrcvpkg;
+	rt_uint32_t sndpkg;
+	rt_uint32_t dropedsndpkg;
+	rt_uint32_t bitpaderrcnt;
+	rt_uint32_t formaterrcnt;
+	rt_uint32_t ackerrcnt;
+	rt_uint32_t biterrcnt;
+	rt_uint32_t crcerrcnt;
+	rt_uint32_t rcvchange;
+	rt_uint32_t sndchange;
+	rt_uint32_t lasterrtype;
 };
 
 #ifdef RT_CAN_USING_HDR
 struct rt_can_hdr
 {
-    rt_uint32_t connected;
-    rt_uint32_t msgs;
-    struct rt_can_filter_item filter;
-    struct rt_list_node list;
+	rt_uint32_t connected;
+	rt_uint32_t msgs;
+	struct rt_can_filter_item filter;
+	struct rt_list_node list;
 };
 #endif
 struct rt_can_device;
 typedef rt_err_t (*rt_canstatus_ind)(struct rt_can_device *, void *);
 typedef struct rt_can_status_ind_type
 {
-    rt_canstatus_ind ind;
-    void *args;
+	rt_canstatus_ind ind;
+	void *args;
 } *rt_can_status_ind_type_t;
 typedef void (*rt_can_bus_hook)(struct rt_can_device *);
 struct rt_can_device
 {
-    struct rt_device parent;
+	struct rt_device parent;
 
-    const struct rt_can_ops *ops;
-    struct can_configure config;
-    struct rt_can_status status;
+	const struct rt_can_ops *ops;
+	struct can_configure config;
+	struct rt_can_status status;
 
-    rt_uint32_t timerinitflag;
-    struct rt_timer timer;
+	rt_uint32_t timerinitflag;
+	struct rt_timer timer;
 
-    struct rt_can_status_ind_type status_indicate;
+	struct rt_can_status_ind_type status_indicate;
 #ifdef RT_CAN_USING_HDR
-    struct rt_can_hdr *hdr;
+	struct rt_can_hdr *hdr;
 #endif
 #ifdef RT_CAN_USING_BUS_HOOK
-    rt_can_bus_hook bus_hook;
+	rt_can_bus_hook bus_hook;
 #endif /*RT_CAN_USING_BUS_HOOK*/
-    struct rt_mutex lock;
-    void *can_rx;
-    void *can_tx;
+	struct rt_mutex lock;
+	void *can_rx;
+	void *can_tx;
 };
 typedef struct rt_can_device *rt_can_t;
 
@@ -229,35 +229,35 @@ typedef struct rt_can_device *rt_can_t;
 typedef struct rt_can_status *rt_can_status_t;
 struct rt_can_msg
 {
-    rt_uint32_t id  : 29;
-    rt_uint32_t ide : 1;
-    rt_uint32_t rtr : 1;
-    rt_uint32_t rsv : 1;
-    rt_uint32_t len : 8;
-    rt_uint32_t priv : 8;
-    rt_uint32_t hdr : 8;
-    rt_uint32_t reserved : 8;
-    rt_uint8_t data[8];
+	rt_uint32_t id  : 29;
+	rt_uint32_t ide : 1;
+	rt_uint32_t rtr : 1;
+	rt_uint32_t rsv : 1;
+	rt_uint32_t len : 8;
+	rt_uint32_t priv : 8;
+	rt_uint32_t hdr : 8;
+	rt_uint32_t reserved : 8;
+	rt_uint8_t data[8];
 };
 typedef struct rt_can_msg *rt_can_msg_t;
 
 struct rt_can_msg_list
 {
-    struct rt_list_node list;
+	struct rt_list_node list;
 #ifdef RT_CAN_USING_HDR
-    struct rt_list_node hdrlist;
-    struct rt_can_hdr *owner;
+	struct rt_list_node hdrlist;
+	struct rt_can_hdr *owner;
 #endif
-    struct rt_can_msg data;
+	struct rt_can_msg data;
 };
 
 struct rt_can_rx_fifo
 {
-    /* software fifo */
-    struct rt_can_msg_list *buffer;
-    rt_uint32_t freenumbers;
-    struct rt_list_node freelist;
-    struct rt_list_node uselist;
+	/* software fifo */
+	struct rt_can_msg_list *buffer;
+	rt_uint32_t freenumbers;
+	struct rt_list_node freelist;
+	struct rt_list_node uselist;
 };
 
 #define RT_CAN_SND_RESULT_OK        0
@@ -272,24 +272,24 @@ struct rt_can_rx_fifo
 
 struct rt_can_sndbxinx_list
 {
-    struct rt_list_node list;
-    struct rt_completion completion;
-    rt_uint32_t result;
+	struct rt_list_node list;
+	struct rt_completion completion;
+	rt_uint32_t result;
 };
 
 struct rt_can_tx_fifo
 {
-    struct rt_can_sndbxinx_list *buffer;
-    struct rt_completion completion;
-    struct rt_list_node freelist;
+	struct rt_can_sndbxinx_list *buffer;
+	struct rt_completion completion;
+	struct rt_list_node freelist;
 };
 
 struct rt_can_ops
 {
-    rt_err_t (*configure)(struct rt_can_device *can, struct can_configure *cfg);
-    rt_err_t (*control)(struct rt_can_device *can, int cmd, void *arg);
-    int (*sendmsg)(struct rt_can_device *can, const void *buf, rt_uint32_t boxno);
-    int (*recvmsg)(struct rt_can_device *can, void *buf, rt_uint32_t boxno);
+	rt_err_t (*configure)(struct rt_can_device *can, struct can_configure *cfg);
+	rt_err_t (*control)(struct rt_can_device *can, int cmd, void *arg);
+	int (*sendmsg)(struct rt_can_device *can, const void *buf, rt_uint32_t boxno);
+	int (*recvmsg)(struct rt_can_device *can, void *buf, rt_uint32_t boxno);
 };
 
 rt_err_t rt_hw_can_register(struct rt_can_device *can,

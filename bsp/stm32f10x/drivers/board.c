@@ -172,7 +172,7 @@ void rt_hw_board_init(void)
 #ifdef RT_USING_COMPONENTS_INIT
 	rt_components_board_init();
 #endif
-rt_hw_lcd_init();
+	rt_hw_lcd_init();
 }
 
 /*@}*/

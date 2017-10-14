@@ -73,54 +73,54 @@
 #endif
 
 #define RT_DEBUG_LOG(type, message)                                           \
-do                                                                            \
-{                                                                             \
-    if (type)                                                                 \
-        rt_kprintf message;                                                   \
-}                                                                             \
-while (0)
+	do                                                                            \
+	{                                                                             \
+		if (type)                                                                 \
+			rt_kprintf message;                                                   \
+	}                                                                             \
+	while (0)
 
 #define RT_ASSERT(EX)                                                         \
-if (!(EX))                                                                    \
-{                                                                             \
-    rt_assert_handler(#EX, __FUNCTION__, __LINE__);                           \
-}
+	if (!(EX))                                                                    \
+	{                                                                             \
+		rt_assert_handler(#EX, __FUNCTION__, __LINE__);                           \
+	}
 
 /* Macro to check current context */
 #if RT_DEBUG_CONTEXT_CHECK
 #define RT_DEBUG_NOT_IN_INTERRUPT                                             \
-do                                                                            \
-{                                                                             \
-    rt_base_t level;                                                          \
-    level = rt_hw_interrupt_disable();                                        \
-    if (rt_interrupt_get_nest() != 0)                                         \
-    {                                                                         \
-        rt_kprintf("Function[%s] shall not used in ISR\n", __FUNCTION__);     \
-        RT_ASSERT(0)                                                          \
-    }                                                                         \
-    rt_hw_interrupt_enable(level);                                            \
-}                                                                             \
-while (0)
+	do                                                                            \
+	{                                                                             \
+		rt_base_t level;                                                          \
+		level = rt_hw_interrupt_disable();                                        \
+		if (rt_interrupt_get_nest() != 0)                                         \
+		{                                                                         \
+			rt_kprintf("Function[%s] shall not used in ISR\n", __FUNCTION__);     \
+			RT_ASSERT(0)                                                          \
+		}                                                                         \
+		rt_hw_interrupt_enable(level);                                            \
+	}                                                                             \
+	while (0)
 
 /* "In thread context" means:
  *     1) the scheduler has been started
  *     2) not in interrupt context.
  */
 #define RT_DEBUG_IN_THREAD_CONTEXT                                            \
-do                                                                            \
-{                                                                             \
-    rt_base_t level;                                                          \
-    level = rt_hw_interrupt_disable();                                        \
-    if (rt_thread_self() == RT_NULL)                                          \
-    {                                                                         \
-        rt_kprintf("Function[%s] shall not be used before scheduler start\n", \
-                   __FUNCTION__);                                             \
-        RT_ASSERT(0)                                                          \
-    }                                                                         \
-    RT_DEBUG_NOT_IN_INTERRUPT;                                                \
-    rt_hw_interrupt_enable(level);                                            \
-}                                                                             \
-while (0)
+	do                                                                            \
+	{                                                                             \
+		rt_base_t level;                                                          \
+		level = rt_hw_interrupt_disable();                                        \
+		if (rt_thread_self() == RT_NULL)                                          \
+		{                                                                         \
+			rt_kprintf("Function[%s] shall not be used before scheduler start\n", \
+			           __FUNCTION__);                                             \
+			RT_ASSERT(0)                                                          \
+		}                                                                         \
+		RT_DEBUG_NOT_IN_INTERRUPT;                                                \
+		rt_hw_interrupt_enable(level);                                            \
+	}                                                                             \
+	while (0)
 #else
 #define RT_DEBUG_NOT_IN_INTERRUPT
 #define RT_DEBUG_IN_THREAD_CONTEXT

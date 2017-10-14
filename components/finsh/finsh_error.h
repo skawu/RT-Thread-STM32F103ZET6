@@ -37,6 +37,6 @@ int finsh_error_init(void);
 u_char finsh_errno(void);
 
 int finsh_error_set(u_char type);
-const char* finsh_error_string(u_char type);
+const char *finsh_error_string(u_char type);
 
 #endif

@@ -39,41 +39,41 @@ struct rt_mtd_nor_device
 	rt_uint32_t block_end;			/* The end of available block */
 
 	/* operations interface */
-	const struct rt_mtd_nor_driver_ops* ops;
+	const struct rt_mtd_nor_driver_ops *ops;
 };
 
 struct rt_mtd_nor_driver_ops
 {
-	rt_err_t (*read_id) (struct rt_mtd_nor_device* device);
+	rt_err_t (*read_id)(struct rt_mtd_nor_device *device);
 
-	rt_size_t (*read)    (struct rt_mtd_nor_device* device, rt_off_t offset, rt_uint8_t* data, rt_uint32_t length);
-	rt_size_t (*write)   (struct rt_mtd_nor_device* device, rt_off_t offset, const rt_uint8_t* data, rt_uint32_t length);
+	rt_size_t (*read)(struct rt_mtd_nor_device *device, rt_off_t offset, rt_uint8_t *data, rt_uint32_t length);
+	rt_size_t (*write)(struct rt_mtd_nor_device *device, rt_off_t offset, const rt_uint8_t *data, rt_uint32_t length);
 
-	rt_err_t (*erase_block)(struct rt_mtd_nor_device* device, rt_off_t offset, rt_uint32_t length);
+	rt_err_t (*erase_block)(struct rt_mtd_nor_device *device, rt_off_t offset, rt_uint32_t length);
 };
 
-rt_err_t rt_mtd_nor_register_device(const char* name, struct rt_mtd_nor_device* device);
+rt_err_t rt_mtd_nor_register_device(const char *name, struct rt_mtd_nor_device *device);
 
-rt_inline rt_uint32_t rt_mtd_nor_read_id(struct rt_mtd_nor_device* device)
+rt_inline rt_uint32_t rt_mtd_nor_read_id(struct rt_mtd_nor_device *device)
 {
 	return device->ops->read_id(device);
 }
 
 rt_inline rt_size_t rt_mtd_nor_read(
-	struct rt_mtd_nor_device* device,
-	rt_off_t offset, rt_uint8_t* data, rt_uint32_t length)
+    struct rt_mtd_nor_device *device,
+    rt_off_t offset, rt_uint8_t *data, rt_uint32_t length)
 {
 	return device->ops->read(device, offset, data, length);
 }
 
 rt_inline rt_size_t rt_mtd_nor_write(
-	struct rt_mtd_nor_device* device,
-	rt_off_t offset, const rt_uint8_t* data, rt_uint32_t length)
+    struct rt_mtd_nor_device *device,
+    rt_off_t offset, const rt_uint8_t *data, rt_uint32_t length)
 {
 	return device->ops->write(device, offset, data, length);
 }
 
-rt_inline rt_err_t rt_mtd_nor_erase_block(struct rt_mtd_nor_device* device, rt_off_t offset, rt_size_t length)
+rt_inline rt_err_t rt_mtd_nor_erase_block(struct rt_mtd_nor_device *device, rt_off_t offset, rt_size_t length)
 {
 	return device->ops->erase_block(device, offset, length);
 }

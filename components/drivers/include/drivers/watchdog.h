@@ -37,15 +37,15 @@
 struct rt_watchdog_ops;
 struct rt_watchdog_device
 {
-    struct rt_device parent;
-    struct rt_watchdog_ops *ops;
+	struct rt_device parent;
+	struct rt_watchdog_ops *ops;
 };
 typedef struct rt_watchdog_device rt_watchdog_t;
 
 struct rt_watchdog_ops
 {
-    rt_err_t (*init)(rt_watchdog_t *wdt);
-    rt_err_t (*control)(rt_watchdog_t *wdt, int cmd, void *arg);
+	rt_err_t (*init)(rt_watchdog_t *wdt);
+	rt_err_t (*control)(rt_watchdog_t *wdt, int cmd, void *arg);
 };
 
 rt_err_t rt_hw_watchdog_register(rt_watchdog_t *wdt,
