@@ -30,9 +30,9 @@
 
 u_char global_errno;
 
-static const char * finsh_error_string_table[] =
+static const char *finsh_error_string_table[] =
 {
-    "No error",
+	"No error",
 	"Invalid token",
 	"Expect a type",
 	"Unknown type",
@@ -52,14 +52,12 @@ static const char * finsh_error_string_table[] =
 int finsh_error_init()
 {
 	global_errno = FINSH_ERROR_OK;
-
 	return 0;
 }
 
 int finsh_error_set(u_char type)
 {
 	global_errno = type;
-
 	return 0;
 }
 
@@ -68,7 +66,7 @@ u_char finsh_errno()
 	return global_errno;
 }
 
-const char* finsh_error_string(u_char type)
+const char *finsh_error_string(u_char type)
 {
 	return finsh_error_string_table[type];
 }

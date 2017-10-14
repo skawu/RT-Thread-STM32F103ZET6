@@ -35,7 +35,7 @@
 
 #ifdef RT_USING_COMPONENTS_INIT
 /*
- * Components Initialization will initialize some driver and components as following 
+ * Components Initialization will initialize some driver and components as following
  * order:
  * rti_start         --> 0
  * BOARD_EXPORT      --> 1
@@ -45,39 +45,39 @@
  * COMPONENT_EXPORT  --> 3
  * FS_EXPORT         --> 4
  * ENV_EXPORT        --> 5
- * APP_EXPORT        --> 6 
- * 
+ * APP_EXPORT        --> 6
+ *
  * rti_end           --> 6.end
  *
- * These automatically initializaiton, the driver or component initial function must 
+ * These automatically initializaiton, the driver or component initial function must
  * be defined with:
  * INIT_BOARD_EXPORT(fn);
  * INIT_DEVICE_EXPORT(fn);
  * ...
  * INIT_APP_EXPORT(fn);
- * etc. 
+ * etc.
  */
 static int rti_start(void)
 {
-    return 0;
+	return 0;
 }
 INIT_EXPORT(rti_start, "0");
 
 static int rti_board_start(void)
 {
-    return 0;
+	return 0;
 }
 INIT_EXPORT(rti_board_start, "0.end");
 
 static int rti_board_end(void)
 {
-    return 0;
+	return 0;
 }
 INIT_EXPORT(rti_board_end, "1.end");
 
 static int rti_end(void)
 {
-    return 0;
+	return 0;
 }
 INIT_EXPORT(rti_end, "6.end");
 
@@ -87,21 +87,24 @@ INIT_EXPORT(rti_end, "6.end");
 void rt_components_board_init(void)
 {
 #if RT_DEBUG_INIT
-    int result;
-    const struct rt_init_desc *desc;
-    for (desc = &__rt_init_desc_rti_board_start; desc < &__rt_init_desc_rti_board_end; desc ++)
-    {
-        rt_kprintf("initialize %s", desc->fn_name);
-        result = desc->fn();
-        rt_kprintf(":%d done\n", result);
-    }
-#else
-    const init_fn_t *fn_ptr;
+	int result;
+	const struct rt_init_desc *desc;
 
-    for (fn_ptr = &__rt_init_rti_board_start; fn_ptr < &__rt_init_rti_board_end; fn_ptr++)
-    {
-        (*fn_ptr)();
-    }
+	for (desc = &__rt_init_desc_rti_board_start; desc < &__rt_init_desc_rti_board_end; desc ++)
+	{
+		rt_kprintf("initialize %s", desc->fn_name);
+		result = desc->fn();
+		rt_kprintf(":%d done\n", result);
+	}
+
+#else
+	const init_fn_t *fn_ptr;
+
+	for (fn_ptr = &__rt_init_rti_board_start; fn_ptr < &__rt_init_rti_board_end; fn_ptr++)
+	{
+		(*fn_ptr)();
+	}
+
 #endif
 }
 
@@ -111,23 +114,25 @@ void rt_components_board_init(void)
 void rt_components_init(void)
 {
 #if RT_DEBUG_INIT
-    int result;
-    const struct rt_init_desc *desc;
+	int result;
+	const struct rt_init_desc *desc;
+	rt_kprintf("do components intialization.\n");
 
-    rt_kprintf("do components intialization.\n");
-    for (desc = &__rt_init_desc_rti_board_end; desc < &__rt_init_desc_rti_end; desc ++)
-    {
-        rt_kprintf("initialize %s", desc->fn_name);
-        result = desc->fn();
-        rt_kprintf(":%d done\n", result);
-    }
+	for (desc = &__rt_init_desc_rti_board_end; desc < &__rt_init_desc_rti_end; desc ++)
+	{
+		rt_kprintf("initialize %s", desc->fn_name);
+		result = desc->fn();
+		rt_kprintf(":%d done\n", result);
+	}
+
 #else
-    const init_fn_t *fn_ptr;
+	const init_fn_t *fn_ptr;
 
-    for (fn_ptr = &__rt_init_rti_board_end; fn_ptr < &__rt_init_rti_end; fn_ptr ++)
-    {
-        (*fn_ptr)();
-    }
+	for (fn_ptr = &__rt_init_rti_board_end; fn_ptr < &__rt_init_rti_end; fn_ptr ++)
+	{
+		(*fn_ptr)();
+	}
+
 #endif
 }
 
@@ -142,30 +147,30 @@ extern int $Super$$main(void);
 /* re-define main function */
 int $Sub$$main(void)
 {
-    rt_hw_interrupt_disable();
-    rtthread_startup();
-    return 0;
+	rt_hw_interrupt_disable();
+	rtthread_startup();
+	return 0;
 }
 #elif defined(__ICCARM__)
 extern int main(void);
 /* __low_level_init will auto called by IAR cstartup */
-extern void __iar_data_init3( void );
+extern void __iar_data_init3(void);
 int __low_level_init(void)
 {
 	// call IAR table copy function.
 	__iar_data_init3();
-    rt_hw_interrupt_disable();
-    rtthread_startup();
-    return 0;
+	rt_hw_interrupt_disable();
+	rtthread_startup();
+	return 0;
 }
 #elif defined(__GNUC__)
 extern int main(void);
 /* Add -eentry to arm-none-eabi-gcc argument */
 int entry(void)
 {
-    rt_hw_interrupt_disable();
-    rtthread_startup();
-    return 0;
+	rt_hw_interrupt_disable();
+	rtthread_startup();
+	return 0;
 }
 #endif
 
@@ -179,72 +184,58 @@ struct rt_thread main_thread;
 /* the system main thread */
 void main_thread_entry(void *parameter)
 {
-    extern int main(void);
-    extern int $Super$$main(void);
-
-    /* RT-Thread components initialization */
-    rt_components_init();
-
-    /* invoke system main function */
+	extern int main(void);
+	extern int $Super$$main(void);
+	/* RT-Thread components initialization */
+	rt_components_init();
+	/* invoke system main function */
 #if defined (__CC_ARM)
-    $Super$$main(); /* for ARMCC. */
+	$Super$$main(); /* for ARMCC. */
 #elif defined(__ICCARM__) || defined(__GNUC__)
-    main();
+	main();
 #endif
 }
 
 void rt_application_init(void)
 {
-    rt_thread_t tid;
-
+	rt_thread_t tid;
 #ifdef RT_USING_HEAP
-    tid = rt_thread_create("main", main_thread_entry, RT_NULL,
-                           2048, RT_THREAD_PRIORITY_MAX / 3, 20);
-    RT_ASSERT(tid != RT_NULL);
+	tid = rt_thread_create("main", main_thread_entry, RT_NULL,
+	                       2048, RT_THREAD_PRIORITY_MAX / 3, 20);
+	RT_ASSERT(tid != RT_NULL);
 #else
-    rt_err_t result;
-
-    tid = &main_thread;
-    result = rt_thread_init(tid, "main", main_thread_entry, RT_NULL,
-                            2048, RT_THREAD_PRIORITY_MAX / 3, 20);
-    RT_ASSERT(result != RT_EOK);
+	rt_err_t result;
+	tid = &main_thread;
+	result = rt_thread_init(tid, "main", main_thread_entry, RT_NULL,
+	                        2048, RT_THREAD_PRIORITY_MAX / 3, 20);
+	RT_ASSERT(result != RT_EOK);
 #endif
-
-    rt_thread_startup(tid);
+	rt_thread_startup(tid);
 }
 
 int rtthread_startup(void)
 {
 	rt_hw_interrupt_disable();
-
-    /* board level initalization
-     * NOTE: please initialize heap inside board initialization.
-     */
-    rt_hw_board_init();
-
-    /* show RT-Thread version */
-    rt_show_version();
-
-    /* timer system initialization */
-    rt_system_timer_init();
-
-    /* scheduler system initialization */
-    rt_system_scheduler_init();
-
-    /* create init_thread */
-    rt_application_init();
-
-    /* timer thread initialization */
-    rt_system_timer_thread_init();
-
-    /* idle thread initialization */
-    rt_thread_idle_init();
-
-    /* start scheduler */
-    rt_system_scheduler_start();
-
-    /* never reach here */
-    return 0;
+	/* board level initalization
+	 * NOTE: please initialize heap inside board initialization.
+	 */
+	rt_hw_board_init();
+	/* show RT-Thread version */
+	rt_show_version();
+	/* timer system initialization */
+	rt_system_timer_init();
+	/* scheduler system initialization */
+	rt_system_scheduler_init();
+	/* create init_thread */
+	rt_application_init();
+	/* timer thread initialization */
+	rt_system_timer_thread_init();
+	/* idle thread initialization */
+	rt_thread_idle_init();
+	/* start scheduler */
+	rt_system_scheduler_start();
+	/* never reach here */
+	return 0;
 }
 #endif
 #endif

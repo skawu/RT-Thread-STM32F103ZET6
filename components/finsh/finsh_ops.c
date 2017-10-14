@@ -30,19 +30,19 @@
 #include "finsh_vm.h"
 
 #define OP_BIN_BYTE(x)  do {\
-        (finsh_sp - 2)->char_value = (finsh_sp - 2)->char_value x (finsh_sp - 1)->char_value; \
-        finsh_sp--; \
-    }while (0)
+		(finsh_sp - 2)->char_value = (finsh_sp - 2)->char_value x (finsh_sp - 1)->char_value; \
+		finsh_sp--; \
+	}while (0)
 
 #define OP_BIN_WORD(x)  do {\
-        (finsh_sp - 2)->short_value = (finsh_sp - 2)->short_value x (finsh_sp - 1)->short_value; \
-        finsh_sp--; \
-    }while (0)
+		(finsh_sp - 2)->short_value = (finsh_sp - 2)->short_value x (finsh_sp - 1)->short_value; \
+		finsh_sp--; \
+	}while (0)
 
 #define OP_BIN_DWORD(x)  do {\
-        (finsh_sp - 2)->long_value = (finsh_sp - 2)->long_value x (finsh_sp - 1)->long_value; \
-        finsh_sp--; \
-    }while (0)
+		(finsh_sp - 2)->long_value = (finsh_sp - 2)->long_value x (finsh_sp - 1)->long_value; \
+		finsh_sp--; \
+	}while (0)
 
 /* --- noop --- */
 void OP_no_op()
@@ -54,22 +54,19 @@ void OP_no_op()
 /* --- add --- */
 void OP_add_byte()
 {
-    OP_BIN_BYTE(+);
-
+	OP_BIN_BYTE(+);
 	return ;
 }
 
 void OP_add_word()
 {
-    OP_BIN_WORD(+);
-
+	OP_BIN_WORD(+);
 	return ;
 }
 
 void OP_add_dword()
 {
-    OP_BIN_DWORD(+);
-
+	OP_BIN_DWORD(+);
 	return ;
 }
 
@@ -77,219 +74,189 @@ void OP_add_dword()
 void OP_sub_byte()
 {
 	OP_BIN_BYTE(-);
-
 	return ;
 }
 
 void OP_sub_word()
 {
 	OP_BIN_WORD(-);
-
 	return ;
 }
 
 void OP_sub_dword()
 {
 	OP_BIN_DWORD(-);
-
 	return ;
 }
 
 /* --- div --- */
 void OP_div_byte()
 {
-	OP_BIN_BYTE(/);
-
+	OP_BIN_BYTE( /);
 	return ;
 }
 
 void OP_div_word()
 {
-	OP_BIN_WORD(/);
-
+	OP_BIN_WORD( /);
 	return ;
 }
 
 void OP_div_dword()
 {
-	OP_BIN_DWORD(/);
-
+	OP_BIN_DWORD( /);
 	return ;
 }
 
 /* --- mod --- */
 void OP_mod_byte()
 {
-	OP_BIN_BYTE(%);
-
+	OP_BIN_BYTE( %);
 	return ;
 }
 
 void OP_mod_word()
 {
-	OP_BIN_WORD(%);
-
+	OP_BIN_WORD( %);
 	return ;
 }
 
 void OP_mod_dword()
 {
-	OP_BIN_DWORD(%);
-
+	OP_BIN_DWORD( %);
 	return ;
 }
 
 /* --- mul --- */
 void OP_mul_byte()
 {
-    OP_BIN_BYTE(*);
-
+	OP_BIN_BYTE( *);
 	return ;
 }
 
 void OP_mul_word()
 {
-	OP_BIN_WORD(*);
-
+	OP_BIN_WORD( *);
 	return ;
 }
 
 void OP_mul_dword()
 {
-	OP_BIN_DWORD(*);
-
+	OP_BIN_DWORD( *);
 	return ;
 }
 
 /* --- and --- */
 void OP_and_byte()
 {
-	OP_BIN_BYTE(&);
-
+	OP_BIN_BYTE( &);
 	return ;
 }
 
 void OP_and_word()
 {
-	OP_BIN_WORD(&);
-
+	OP_BIN_WORD( &);
 	return ;
 }
 
 void OP_and_dword()
 {
-	OP_BIN_DWORD(&);
-
+	OP_BIN_DWORD( &);
 	return ;
 }
 
 /* --- or --- */
 void OP_or_byte()
 {
-	OP_BIN_BYTE(|);
-
+	OP_BIN_BYTE( |);
 	return ;
 }
 
 void OP_or_word()
 {
-	OP_BIN_WORD(|);
-
+	OP_BIN_WORD( |);
 	return ;
 }
 
 void OP_or_dword()
 {
-	OP_BIN_DWORD(|);
-
+	OP_BIN_DWORD( |);
 	return ;
 }
 
 /* --- xor --- */
 void OP_xor_byte()
 {
-	OP_BIN_BYTE(^);
-
+	OP_BIN_BYTE( ^);
 	return ;
 }
 
 void OP_xor_word()
 {
-	OP_BIN_WORD(^);
-
+	OP_BIN_WORD( ^);
 	return ;
 }
 
 void OP_xor_dword()
 {
-	OP_BIN_DWORD(^);
-
+	OP_BIN_DWORD( ^);
 	return ;
 }
 
 /* --- bw --- */
 void OP_bw_byte()
 {
-	(finsh_sp - 1)->char_value = ~ ((finsh_sp - 1)->char_value);
-
+	(finsh_sp - 1)->char_value = ~((finsh_sp - 1)->char_value);
 	return ;
 }
 
 void OP_bw_word()
 {
-	(finsh_sp - 1)->short_value = ~ ((finsh_sp - 1)->short_value);
-
+	(finsh_sp - 1)->short_value = ~((finsh_sp - 1)->short_value);
 	return ;
 }
 
 void OP_bw_dword()
 {
-	(finsh_sp - 1)->long_value = ~ ((finsh_sp - 1)->long_value);
-
+	(finsh_sp - 1)->long_value = ~((finsh_sp - 1)->long_value);
 	return ;
 }
 
 /* --- shl --- */
 void OP_shl_byte()
 {
-	OP_BIN_BYTE(<<);
-
+	OP_BIN_BYTE( <<);
 	return ;
 }
 
 void OP_shl_word()
 {
-	OP_BIN_WORD(<<);
-
+	OP_BIN_WORD( <<);
 	return ;
 }
 
 void OP_shl_dword()
 {
-	OP_BIN_DWORD(<<);
-
+	OP_BIN_DWORD( <<);
 	return ;
 }
 
 /* --- shr --- */
 void OP_shr_byte()
 {
-	OP_BIN_BYTE(>>);
-
+	OP_BIN_BYTE( >>);
 	return ;
 }
 
 void OP_shr_word()
 {
-	OP_BIN_WORD(>>);
-
+	OP_BIN_WORD( >>);
 	return ;
 }
 
 void OP_shr_dword()
 {
-	OP_BIN_DWORD(>>);
-
+	OP_BIN_DWORD( >>);
 	return ;
 }
 
@@ -297,102 +264,78 @@ void OP_shr_dword()
 void OP_ld_byte()
 {
 	finsh_sp->char_value = *finsh_pc;
-
 	finsh_sp++;
 	finsh_pc++;
-
 	return ;
 }
 
 void OP_ld_word()
 {
 	finsh_sp->short_value = FINSH_GET16(finsh_pc);
-
 	finsh_sp ++;
 	finsh_pc += 2;
-
 	return ;
 }
 
 void OP_ld_dword()
 {
 	finsh_sp->long_value = FINSH_GET32(finsh_pc);
-
 	finsh_sp ++;
 	finsh_pc += 4;
-
 	return ;
 }
 
 void OP_ld_value_byte()
 {
-	char* c;
-
-	c = (char*) (FINSH_GET32(finsh_pc));
-
+	char *c;
+	c = (char *)(FINSH_GET32(finsh_pc));
 	finsh_sp->char_value = *c;
-
 	finsh_sp ++;
 	finsh_pc += 4;
-
 	return;
 }
 
 void OP_ld_value_byte_stack()
 {
-	char* c;
-
+	char *c;
 	c = (char *)(finsh_sp - 1)->long_value;
 	(finsh_sp - 1)->char_value = *c;
-
 	return;
 }
 
 void OP_ld_value_word()
 {
-	short* s;
-
-	s = (short*) (FINSH_GET32(finsh_pc));
-
+	short *s;
+	s = (short *)(FINSH_GET32(finsh_pc));
 	finsh_sp->short_value = *s;
-
 	finsh_sp ++;
 	finsh_pc += 4;
-
 	return;
 }
 
 void OP_ld_value_word_stack()
 {
-	short* s;
-
+	short *s;
 	s = (short *)(finsh_sp - 1)->long_value;
 	(finsh_sp - 1)->short_value = *s;
-
 	return;
 }
 
 void OP_ld_value_dword()
 {
-	long* l;
-
-	l = (long*) (FINSH_GET32(finsh_pc));
-
+	long *l;
+	l = (long *)(FINSH_GET32(finsh_pc));
 	finsh_sp->long_value = *l;
-
 	finsh_sp ++;
 	finsh_pc += 4;
-
 	return;
 }
 
 void OP_ld_value_dword_stack()
 {
-	long* l;
-
+	long *l;
 	l = (long *)(finsh_sp - 1)->long_value;
 	(finsh_sp - 1)->long_value = *l;
-
 	return;
 }
 
@@ -403,9 +346,8 @@ void OP_ld_value_dword_stack()
  */
 void OP_st_byte()
 {
-	*(char*)((finsh_sp - 2)->long_value) = (finsh_sp - 1)->char_value;
+	*(char *)((finsh_sp - 2)->long_value) = (finsh_sp - 1)->char_value;
 	finsh_sp --;
-
 	return ;
 }
 
@@ -415,9 +357,8 @@ void OP_st_byte()
  */
 void OP_st_word()
 {
-	*(short*)((finsh_sp - 2)->long_value) = (finsh_sp - 1)->short_value;
+	*(short *)((finsh_sp - 2)->long_value) = (finsh_sp - 1)->short_value;
 	finsh_sp --;
-
 	return ;
 }
 
@@ -427,9 +368,8 @@ void OP_st_word()
  */
 void OP_st_dword()
 {
-	*(long*)((finsh_sp - 2)->long_value) = (finsh_sp - 1)->long_value;
+	*(long *)((finsh_sp - 2)->long_value) = (finsh_sp - 1)->long_value;
 	finsh_sp --;
-
 	return ;
 }
 
@@ -446,15 +386,14 @@ void OP_call()
 	/* the max number of arg*/
 	unsigned long parameterv[16];
 	unsigned int  parameters, i;
-
 	typedef unsigned long var_t;
-	typedef var_t (*op_func)();
+	typedef var_t(*op_func)();
 	op_func f;
 	var_t   r;
-
 	parameters = *finsh_pc ++;
+	i = 0;
+	finsh_sp --;
 
-	i = 0; finsh_sp --;
 	while (i < parameters)
 	{
 		parameterv[parameters - 1 - i] = finsh_sp->long_value;
@@ -463,108 +402,108 @@ void OP_call()
 	}
 
 	f = (op_func)(finsh_sp->long_value);
+
 	switch (parameters)
 	{
-	case 0:
-		r = f(0);
-		break;
+		case 0:
+			r = f(0);
+			break;
 
-	case 1:
-		r = f(parameterv[0]);
-		break;
+		case 1:
+			r = f(parameterv[0]);
+			break;
 
-	case 2:
-		r = f(parameterv[0], parameterv[1]);
-		break;
+		case 2:
+			r = f(parameterv[0], parameterv[1]);
+			break;
 
-	case 3:
-		r = f(parameterv[0], parameterv[1], parameterv[2]);
-		break;
+		case 3:
+			r = f(parameterv[0], parameterv[1], parameterv[2]);
+			break;
 
-	case 4:
-		r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3]);
-		break;
+		case 4:
+			r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3]);
+			break;
 
-	case 5:
-		r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
-				parameterv[4]);
-		break;
+		case 5:
+			r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
+			      parameterv[4]);
+			break;
 
-	case 6:
-		r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
-				parameterv[4], parameterv[5]);
-		break;
+		case 6:
+			r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
+			      parameterv[4], parameterv[5]);
+			break;
 
-	case 7:
-		r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
-				parameterv[4], parameterv[5], parameterv[6]);
-		break;
+		case 7:
+			r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
+			      parameterv[4], parameterv[5], parameterv[6]);
+			break;
 
-	case 8:
-		r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
-				parameterv[4], parameterv[5], parameterv[6], parameterv[7]);
-		break;
+		case 8:
+			r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
+			      parameterv[4], parameterv[5], parameterv[6], parameterv[7]);
+			break;
 
-	case 9:
-		r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
-				parameterv[4], parameterv[5], parameterv[6], parameterv[7],
-				parameterv[8]);
-		break;
+		case 9:
+			r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
+			      parameterv[4], parameterv[5], parameterv[6], parameterv[7],
+			      parameterv[8]);
+			break;
 
-	case 10:
-		r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
-				parameterv[4], parameterv[5], parameterv[6], parameterv[7],
-				parameterv[8], parameterv[9]);
-		break;
+		case 10:
+			r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
+			      parameterv[4], parameterv[5], parameterv[6], parameterv[7],
+			      parameterv[8], parameterv[9]);
+			break;
 
-	case 11:
-		r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
-				parameterv[4], parameterv[5], parameterv[6], parameterv[7],
-				parameterv[8], parameterv[9], parameterv[10]);
-		break;
+		case 11:
+			r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
+			      parameterv[4], parameterv[5], parameterv[6], parameterv[7],
+			      parameterv[8], parameterv[9], parameterv[10]);
+			break;
 
-	case 12:
-		r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
-				parameterv[4], parameterv[5], parameterv[6], parameterv[7],
-				parameterv[8], parameterv[9], parameterv[10], parameterv[11]);
-		break;
+		case 12:
+			r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
+			      parameterv[4], parameterv[5], parameterv[6], parameterv[7],
+			      parameterv[8], parameterv[9], parameterv[10], parameterv[11]);
+			break;
 
-	case 13:
-		r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
-				parameterv[4], parameterv[5], parameterv[6], parameterv[7],
-				parameterv[8], parameterv[9], parameterv[10], parameterv[11],
-				parameterv[12]);
-		break;
+		case 13:
+			r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
+			      parameterv[4], parameterv[5], parameterv[6], parameterv[7],
+			      parameterv[8], parameterv[9], parameterv[10], parameterv[11],
+			      parameterv[12]);
+			break;
 
-	case 14:
-		r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
-				parameterv[4], parameterv[5], parameterv[6], parameterv[7],
-				parameterv[8], parameterv[9], parameterv[10], parameterv[11],
-				parameterv[12], parameterv[13]);
-		break;
+		case 14:
+			r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
+			      parameterv[4], parameterv[5], parameterv[6], parameterv[7],
+			      parameterv[8], parameterv[9], parameterv[10], parameterv[11],
+			      parameterv[12], parameterv[13]);
+			break;
 
-	case 15:
-		r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
-				parameterv[4], parameterv[5], parameterv[6], parameterv[7],
-				parameterv[8], parameterv[9], parameterv[10], parameterv[11],
-				parameterv[12], parameterv[13], parameterv[14]);
-		break;
+		case 15:
+			r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
+			      parameterv[4], parameterv[5], parameterv[6], parameterv[7],
+			      parameterv[8], parameterv[9], parameterv[10], parameterv[11],
+			      parameterv[12], parameterv[13], parameterv[14]);
+			break;
 
-	case 16:
-		r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
-				parameterv[4], parameterv[5], parameterv[6], parameterv[7],
-				parameterv[8], parameterv[9], parameterv[10], parameterv[11],
-				parameterv[12], parameterv[13], parameterv[14], parameterv[15]);
-		break;
+		case 16:
+			r = f(parameterv[0], parameterv[1], parameterv[2], parameterv[3],
+			      parameterv[4], parameterv[5], parameterv[6], parameterv[7],
+			      parameterv[8], parameterv[9], parameterv[10], parameterv[11],
+			      parameterv[12], parameterv[13], parameterv[14], parameterv[15]);
+			break;
 
-	default:
-		r = 0;
-		break;
+		default:
+			r = 0;
+			break;
 	}
 
 	finsh_sp->long_value = r;
 	finsh_sp ++;
-
 	return ;
 }
 
