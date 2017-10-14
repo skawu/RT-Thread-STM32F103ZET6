@@ -248,6 +248,9 @@
       <name>$PROJ_DIR$\drivers\gpio.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\drivers\lcd.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\drivers\led.c</name>
     </file>
     <file>

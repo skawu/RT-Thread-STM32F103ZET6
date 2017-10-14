@@ -147,11 +147,11 @@ int rt_application_init(void)
 	{
 		rt_thread_startup(&led_thread);
 	}
-
-	if (-1 == app_init_thread_test())
-	{
-		return -1;
-	}
+//线程学习测试函数
+//	if (-1 == app_init_thread_test())
+//	{
+//		return -1;
+//	}
 
 #if (RT_THREAD_PRIORITY_MAX == 32)
 	init_thread = rt_thread_create("init",
