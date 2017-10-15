@@ -321,7 +321,7 @@ void rt_lcd_ascii_display(char *p)
 		{
 			H = 0;
 			V += 16;
-                        p++;
+			p++;
 			continue ;
 		}
 
@@ -354,6 +354,13 @@ void rt_lcd_ascii_display(char *p)
 		{
 			H = 0;
 			V += 16;
+		}
+
+		if (V > 399)
+		{
+			V = 0;
+			H = 0;
+			lcd_clear_screen(BLACK);
 		}
 	}
 }
